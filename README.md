@@ -18,7 +18,7 @@ NutriScan is a **web-based application** that helps users analyze food ingredien
 ## 📸 Screenshots  
 Here are some screenshots of the project in action:  
 
-![DEMO](NutriScan_Demo.png)  
+![DEMO](https://github.com/poshika27/NutriScan/blob/main/NutriScan-Demo.png)  
 
 ## 🚀 Getting Started  
 
