@@ -1,0 +1,205 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Recipes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .sidebar {
+            width: 250px;
+        }
+        .content {
+            margin-left: 250px;
+        }
+        .recipe-img {
+            width: 40px; 
+            height: 40px; 
+            margin-right: 8px; 
+        }
+    </style>
+</head>
+<body class="bg-[#28a745] flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-white shadow-lg p-4 fixed h-full">
+        <h2 class="text-xl font-semibold mb-4">Recipes</h2>
+        <ul>
+            <li class="mb-2 flex items-center">
+                <img src="{% static 'users/no1.jpg' %}" alt="Recipe 1" class="recipe-img">
+                <a href="#recipe1" class="text-blue-500 hover:text-blue-700 transition duration-200">Recipe 1</a>
+            </li>
+            <li class="mb-2 flex items-center">
+                <img src="{% static 'users/no2.jpg' %}" alt="Recipe 2" class="recipe-img">
+                <a href="#recipe2" class="text-blue-500 hover:text-blue-700 transition duration-200">Recipe 2</a>
+            </li>
+            <li class="mb-2 flex items-center">
+                <img src="{% static 'users/no3.jpg' %}" alt="Recipe 3" class="recipe-img">
+                <a href="#recipe3" class="text-blue-500 hover:text-blue-700 transition duration-200">Recipe 3</a>
+            </li>
+            <li class="mb-2 flex items-center">
+                <img src="{% static 'users/no4.jpg' %}" alt="Recipe 4" class="recipe-img">
+                <a href="#recipe4" class="text-blue-500 hover:text-blue-700 transition duration-200">Recipe 4</a>
+            </li>
+        </ul>
+    </div>
+
+    
+    <div class="content p-4 w-full">
+        
+        <div id="recipe1" class="bg-white rounded-lg shadow-lg p-4 mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-lg font-semibold">Recipe 1</h1>
+                <h2 class="text-lg font-semibold">Mushroom Omelette</h2>
+                <i class="far fa-heart text-gray-500"></i>
+            </div>
+            <div class="flex items-center mt-2">
+                <div class="flex items-center ml-auto text-gray-500 text-sm">
+                    <i class="far fa-clock mr-1"></i>
+                    <span>15 mins</span>
+                </div>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">Ingredients</h3>
+            <ul class="mt-2">
+                <li class="flex justify-between items-center py-1">
+                    <span>2 eggs</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1/2 cup mushrooms, sliced</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1/4 cup milk</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1 tablespoon butter</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>Salt and pepper to taste</span>
+                    <i class="fas fa-plus-circle text-gray-500"></i>
+                </li>
+            </ul>
+            <button class="bg-[#28a745] text-white w-full py-2 rounded-lg mt-4">View Full Recipe</button>
+        </div>
+
+        
+        <div id="recipe2" class="bg-white rounded-lg shadow-lg p-4 mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-lg font-semibold">Recipe 2</h1>
+                <h2 class="text-lg font-semibold">Ketchup Fried Rice</h2>
+                <i class="far fa-heart text-gray-500"></i>
+            </div>
+            <div class="flex items-center mt-2">
+                <div class="flex items-center ml-auto text-gray-500 text-sm">
+                    <i class="far fa-clock mr-1"></i>
+                    <span>20 mins</span>
+                </div>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">Ingredients</h3>
+            <ul class="mt-2">
+                <li class="flex justify-between items-center py-1">
+                    <span >2 cups cooked white rice</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1/2 cup ketchup</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1/2 cup onions, chopped</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1 tablespoon butter</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>Salt and pepper to taste</span>
+                    <i class="fas fa-plus-circle text-gray-500"></i>
+                </li>
+            </ul>
+            <button class="bg-[#28a745] text-white w-full py-2 rounded-lg mt-4">View Full Recipe</button>
+        </div>
+
+        
+        <div id="recipe3" class="bg-white rounded-lg shadow-lg p-4 mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-lg font-semibold">Recipe 3</h1>
+                <h2 class="text-lg font-semibold">Onion Soup</h2>
+                <i class="far fa-heart text-gray-500"></i>
+            </div>
+            <div class="flex items-center mt-2">
+                <div class="flex items-center ml-auto text-gray-500 text-sm">
+                    <i class="far fa-clock mr-1"></i>
+                    <span>30 mins</span>
+                </div>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">Ingredients</h3>
+            <ul class="mt-2">
+                <li class="flex justify-between items-center py-1">
+                    <span>4 large onions, sliced</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1/4 cup flour</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>4 cups beef broth</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1/4 cup butter</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>Salt and pepper to taste</span>
+                    <i class="fas fa-plus-circle text-gray-500"></i>
+                </li>
+            </ul>
+            <button class="bg-[#28a745] text-white w-full py-2 rounded-lg mt-4">View Full Recipe</button>
+        </div>
+
+       
+        <div id="recipe4" class="bg-white rounded-lg shadow-lg p-4 mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-lg font-semibold">Recipe 4</h1>
+                <h2 class="text-lg font-semibold">Butter Rice</h2>
+                <i class="far fa-heart text-gray-500"></i>
+            </div>
+            <div class="flex items-center mt-2">
+                <div class="flex items-center ml-auto text-gray-500 text-sm">
+                    <i class="far fa-clock mr-1"></i>
+                    <span>25 mins</span>
+                </div>
+            </div>
+            <h3 class="text-lg font-semibold mt-2">Ingredients</h3>
+            <ul class="mt-2">
+                <li class="flex justify-between items-center py-1">
+                    <span>2 cups white rice</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1/4 cup butter</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class="flex justify-between items-center py-1">
+                    <span>1/2 cup milk</span>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </li>
+                <li class ```html
+="flex justify-between items-center py-1">
+                    <span>Salt and pepper to taste</span>
+                    <i class="fas fa-plus-circle text-gray-500"></i>
+                </li>
+            </ul>
+            <button class="bg-[#28a745] text-white w-full py-2 rounded-lg mt-4">View Full Recipe</button>
+        </div>
+    </div>
+</body>
+</html>

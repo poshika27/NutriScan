@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriScan</title>
+    {% load static %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.0.2/tesseract.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .red-btn {
+            background-color: #d32f2f;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .red-btn:hover {
+            background-color: #b71c1c;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        section {
+            height: auto;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #about {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 5%;
+        }
+
+        #about img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .about-content {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 35%;
+        }
+
+        .about-content h1 {
+            font-weight: 300;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.4rem;
+        }
+
+        
+        .extracted-text {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin-left: 20px;
+            border-radius: 10px;
+            max-width: 40%;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .ai-suggestion{
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin-left: 20px;
+            border-radius: 10px;
+            max-width: 40%;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        #benefits {
+            background-color: #D3E8D5;
+            height: 100vh;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        #benefits h2 {
+            color: #6a9b2b;
+            font-size: 2rem;
+            font-family: cursive;
+        }
+
+        #benefits h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        #benefits p {
+            max-width: 800px;
+            margin: 10px auto;
+            font-size: 1.2rem;
+        }
+
+        .benefit-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .benefit {
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .benefit img {
+            width: 150px;
+            height: 150px;
+        }
+        #profile {
+            height: 100vh;
+        }
+        #explore {
+            background-color: #e8f5e9; 
+            height: 100vh;
+            padding: 40px 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        #explore h1 {
+            color: #388e3c; 
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        #explore p {
+            color: #2e7d32;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        #explore ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        #explore li {
+            font-size: 1.5rem;
+            color: #388e3c;
+            margin: 10px 0;
+        }
+
+        
+        .blog-section {
+    padding: 60px 20px;
+    background-color: #e8f5e9;
+    text-align: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 80vh; 
+}
+
+
+
+.blog-card {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    align-items: center; 
+    width: 300px;
+    height: 400px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none; 
+    color: inherit; 
+    position: relative; 
+}
+
+
+.blog-card img {
+    width: 100%;
+    height: 180px; 
+    object-fit: cover; 
+}
+
+.blog-card .tag {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.blog-card h2 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.blog-card p {
+    padding: 0 10px 10px;
+    font-size: 1rem;
+    flex-grow: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="{% static 'users/finallogo..jpg' %}" alt="NutriScan Logo">
+                <div class="logo">NutriScan</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#explore">Explore</a></li>
+                <li><button class="red-btn" onclick="scanFood()">Scan Your Food</button></li>
+                <li><button class="red-btn" onclick="uploadImage()">Upload Image</button></li>
+                <li><a href="{% url 'logout' %}">Logout 🔓</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <img src="{% static 'users/bgimage.jpg' %}" alt="NutriScan Image">
+            <div class="about-content">
+                <h1>Welcome to NutriScan🍏</h1>
+                <h2>your smart food companion!</h2>
+                <p> Instantly scan meals, decode nutrients, and get personalized insights for a healthier you.</p>
+                <p> Eat smarter, live better! ✨</p>
+            </div>
+            
+            
+            <div class="extracted-text" id="extractedText">
+                <h2>Extracted Text:</h2>
+                <p id="textOutput">No text extracted yet.</p>
+            </div>
+
+            <div class="ai-suggestion">
+                <h2>AI Food Suggestion:</h2>
+                <p id="aiSuggestion">No suggestion yet.</p>
+            </div>
+
+            
+        </section>
+
+        <section id="benefits">
+            <h2>Our Benefits</h2><br>
+            <h1>Why Choose NutriScan?</h1><br>
+            <p>NutriScan helps you track and analyze the nutritional value of your meals, ensuring healthier food choices.</p><br>
+
+            <div class="benefit-container">
+                <div class="benefit">
+                    <img src="{% static 'users/ingredients.jpg' %}" alt="Fresh Ingredients">
+                    <h3>Fresh Ingredients</h3>
+                    <p>Identifies fresh and wholesome ingredients for a balanced diet.</p>
+                </div>
+
+                <div class="benefit">
+                    <img src="{% static 'users/quality.jpg' %}" alt="Finest Quality">
+                    <h3>Finest Quality</h3>
+                    <p>Uses AI for precise nutritional analysis.</p>
+                </div>
+
+                <div class="benefit">
+                    <img src="{% static 'users/scan.jpeg' %}" alt="Scan Any Food">
+                    <h3>Scan Any Food</h3>
+                    <p>Supports packaged and home-cooked meals.</p>
+                </div>
+
+                <div class="benefit">
+                    <img src="{% static 'users/tips.jpg' %}" alt="Personalized Health Tips">
+                    <h3>Personalized Health Tips</h3>
+                    <p>Get recommendations based on your health goals.</p>
+                </div>
+            </div>
+        </section>
+         
+        ```<section id="profile">
+            <h1 style="text-align: center; color: rgb(7, 117, 75); font-size: 2.5rem; margin-bottom: 30px;">Profile</h1>
+            <div class="profile-card" style="background: #D3E8D5; border-radius: 10px; padding: 30px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); max-width: 500px; margin: auto; display: flex; flex-direction: column; align-items: center;">
+                <h2 style="color: #388e3c; font-size: 2rem; margin-bottom: 20px; text-align: center;">User  Profile</h2>
+                <p style="font-size: 1.5rem; margin: 10px 0; text-align: center;"><strong>Username:</strong> {{ profile.user.username }}</p>
+                <p style="font-size: 1.5rem; margin: 10px 0; text-align: center;"><strong>Weight:</strong> {{ profile.weight }} kg</p>
+                <p style="font-size: 1.5rem; margin: 10px 0; text-align: center;"><strong>Height:</strong> {{ profile.height }} cm</p>
+                <p style="font-size: 1.5rem; margin: 10px 0; text-align: center;"><strong>Age:</strong> {{ profile.age }}</p>
+                <p style="font-size: 1.5rem; margin: 10px 0; text-align: center;"><strong>Gender:</strong> {{ profile.gender }}</p>
+                <p style="font-size: 1.5rem; margin: 10px 0; text-align: center;"><strong>Health Issues:</strong> {{ profile.health_issues }}</p>
+            </div>
+        </section>```
+
+
+        <section id="explore">
+            <h1>Explore More...</h1>
+            <div class="blog-section">
+                <a href="{% url 'leftover' %}" class="blog-card">
+                    <img src="{% static 'users/left.jpg' %}" alt="Nestle Collaboration">
+                    <span class="tag">Nutrition</span>
+                    <h2>Leftover Magic:Turn your leftovers into savouries</h2>
+                    <p>Revamp leftovers, cut waste, and save cash—one tasty meal at a time!</p>
+                </a>
+                
+                <a href="{% url 'bmi' %}" class="blog-card">
+                    <img src="{% static 'users/bmi.jpg' %}" alt="Clean Bulking Guide">
+                    <span class="tag">Nutrition</span>
+                    <h2>Fit Scale Index</h2>
+                    <p>Reach your health goals with smart body insights!</p>
+                </a>
+                <a href="{% url 'cravings' %}" class="blog-card">
+                    <img src="{% static 'users/recipe.jpg' %}" alt="Nestle Collaboration">
+                    <span class="tag">Nutrition</span>
+                    <h2>HealthifyYourCravings</h2>
+                    <p>Satisfy Your Cravings the Healthy Way: Because You Deserve Better!</p>
+                </a>
+        
+            </div>
+        </section>        
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2025 NutriScan. All rights reserved.</p>
+    </footer>            
+
+
+    <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
+
+    <script>
+        function scanFood() {
+            alert("Scanning feature coming soon!");
+        }
+
+        function uploadImage() {
+            document.getElementById("fileInput").click();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                alert("Processing file: " + file.name);
+                
+                const reader = new FileReader();
+                reader.onload = function () {
+                    extractText(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        function extractText(imageData) {
+    Tesseract.recognize(
+        imageData,
+        'eng',
+        {
+            logger: m => console.log(m)
+        }
+    ).then(({ data: { text } }) => {
+        document.getElementById("textOutput").innerText = text || "No text found.";
+
+        
+        fetch('/extract_text/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: text })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                
+                document.getElementById("aiSuggestion").innerText = data.suggestion || "No suggestion available.";
+            } else {
+                document.getElementById("aiSuggestion").innerText = "Error fetching suggestion.";
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching AI suggestion:', error);
+            document.getElementById("aiSuggestion").innerText = "Failed to fetch suggestion.";
+        });
+    }).catch(error => {
+        console.error("Error extracting text:", error);
+        document.getElementById("textOutput").innerText = "Error extracting text.";
+    });
+}
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutriscan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            animation: moveStars 20s linear infinite;
+            z-index: -1;
+        }
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 128, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+            transition: transform 0.3s ease;
+            margin: 100px auto;
+            position: relative;
+            z-index: 10;
+        }
+        .container:hover {
+            transform: scale(1.05);
+        }
+        .logo img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .logo-text {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+        .tagline {
+            font-size: 18px;
+            color: #388e3c;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .button {
+            display: block;
+            width: 90%;
+            max-width: 400px;
+            padding: 14px;
+            margin: 10px auto;
+            border: none;
+            border-radius: 25px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .button:hover {
+            opacity: 0.9;
+            transform: scale(1.1);
+        }
+        .button.low { background-color: #4CAF50; }
+        .button.fit { background-color: #388e3c; }
+        .button.obese { background-color: #d32f2f; }
+        .button.high-fat { background-color: #fbc02d; color: #333; }
+        .suggestion {
+            margin-top: 20px;
+            font-size: 22px;
+            color: #2e7d32;
+            font-weight: bold;
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
+            z-index: 5;
+            text-align: left;
+            margin: auto;
+        }
+        .food-list {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <div class="logo-text">Nutriscan</div>
+        <div class="tagline">KNOW YOUR BMI AND BODY BETTER!</div>
+        
+        <button class="button low" onclick="showSuggestion('low')">Under Weight(<18.5)</button>
+        <button class="button fit" onclick="showSuggestion('fit')">Normal Weight(18.5-24.9)</button>
+        <button class="button obese" onclick="showSuggestion('obese')">Over Weight(25-29.9)</button>
+        <button class="button high-fat" onclick="showSuggestion('high-fat')">Obese(>30)</button>
+        
+        <div id="suggestion" class="bg-white p-4 shadow-md rounded"></div>
+
+    </div>
+    
+    <script>
+        function showSuggestion(type) {
+            let goal = "";
+            let bestMillets = "";
+            let foodItems = [];
+    
+            switch (type) {
+                case 'low':
+                    goal = "Increase healthy calories and protein intake";
+                    bestMillets = "Foxtail Millet, Little Millet, Kodo Millet";
+                    foodItems = [
+                        "Millet Porridge with nuts, dates, and milk",
+                        "Foxtail Millet Upma with ghee and vegetables",
+                        "Kodo Millet Khichdi with dal and coconut",
+                        "Millet Laddoos with jaggery and nuts"
+                    ];
+                    break;
+                case 'fit':
+                    goal = "Maintain balanced nutrition";
+                    bestMillets = "Finger Millet (Ragi), Pearl Millet (Bajra), Sorghum (Jowar)";
+                    foodItems = [
+                        "Ragi Dosa with coconut chutney",
+                        "Bajra Roti with dal and sabzi",
+                        "Jowar Salad with sprouted legumes",
+                        "Millet Idli/Dhokla for a light meal"
+                    ];
+                    break;
+                case 'obese':
+                    goal = "Control weight with high-fiber, low-calorie foods";
+                    bestMillets = "Barnyard Millet, Browntop Millet, Kodo Millet";
+                    foodItems = [
+                        "Barnyard Millet Pulao with veggies",
+                        "Kodo Millet Soup with spices",
+                        "Browntop Millet Chilla (savory pancake)",
+                        "Low-Calorie Millet Smoothie (with yogurt & seeds)"
+                    ];
+                    break;
+                case 'high-fat':
+                    goal = "Focus on high-fiber, low-carb, and protein-rich foods";
+                    bestMillets = "Little Millet, Barnyard Millet, Browntop Millet";
+                    foodItems = [
+                        "Little Millet Salad with nuts and veggies",
+                        "Barnyard Millet Upma with minimal oil",
+                        "Browntop Millet Detox Drink (fermented millet water)",
+                        "Millet-Flaxseed Roti for better digestion"
+                    ];
+                    break;
+                default:
+                    goal = "Select a valid category.";
+                    bestMillets = "";
+                    foodItems = [];
+            }
+    
+            let suggestionElement = document.getElementById('suggestion');
+            suggestionElement.innerHTML = `
+                <h3>🥗 Suggested Foods:</h3>
+                <p><strong>🎯 Goal:</strong> ${goal}</p>
+                <p><strong>✅ Best Millets:</strong> ${bestMillets}</p>
+                <ul class="food-list">
+                    ${foodItems.map(item => `<li>🍽️ ${item}</li>`).join('')}
+                </ul>
+            `;
+        }
+    </script>
+</body>
+</html>

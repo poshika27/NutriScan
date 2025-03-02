@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Landing Page 🚀</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: #D3E8D5;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+            margin: 0;
+            animation: backgroundAnimation 10s ease infinite;
+        }
+        @keyframes backgroundAnimation {
+            0% { background-color: #D3E8D5; }
+            50% { background-color: #D3E8D5; }
+            100% { background-color: #D3E8D5; }
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .btn {
+            text-decoration: none;
+            background: linear-gradient(45deg, #007BFF, #0056b3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, #0056b3, #007BFF);
+        }
+        h1 {
+            font-size: 36px;
+            color: rgb(7, 117, 75);
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .logo {
+            width: 200px;
+            margin-bottom: 20px;
+            animation: scaleUp 1s ease-in-out;
+        }
+        @keyframes scaleUp {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .messages {
+            color: #28A745;
+            font-weight: bold;
+            background: #D4EDDA;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 5px solid #218838;
+            width: fit-content;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    
+    <img src="{% static 'users/finallogo..jpg' %}" alt="logo" class="logo" width="200" height="200"/>
+
+    <h1>Welcome to NutriScan 🍎</h1>
+
+    <div class="container">
+        <a href="{% url 'login' %}" class="btn">Login 🔐</a>
+        <a href="{% url 'register' %}" class="btn">Register 📝</a>
+    </div>
+</body>
+</html>

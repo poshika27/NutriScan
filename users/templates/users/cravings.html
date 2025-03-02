@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriScan - Healthy Cravings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: #D3E8D5;
+            color: #2d2d2d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .app-name {
+            font-size: 35px;
+            font-weight: bold;
+            color: rgb(7, 117, 75);
+        }
+
+        .container {
+            max-width: 500px;
+            width: 90%;
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .recipe-container {
+            max-width: 800px;
+            width: 90%;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: left;
+            display: none;
+        }
+
+        #recipe {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="app-name">NutriScan</div>
+    </div>
+
+    <div class="container">
+        <h2>Healthy Cravings</h2>
+        <p>Enter your craving below, and we'll suggest a healthier alternative!</p>
+        <input type="text" id="craving" placeholder="e.g., Pizza, Ice Cream">
+        <button onclick="suggestRecipe()">Get Healthy Recipe</button>
+    </div>
+
+    <div class="recipe-container" id="recipeContainer">
+        <div id="recipe"></div>
+    </div>
+
+    <script>
+        const recipes = {
+            "pizza": {
+                title: "Whole-Wheat Tortilla Pizza",
+                ingredients: `- Whole-wheat tortilla<br>- 2 tbsp tomato sauce<br>- Fresh veggies<br>- Low-fat cheese`,
+                procedure: `1. Preheat oven to 375°F.<br> 2. Spread sauce on tortilla.<br> 3. Add veggies & cheese.<br> 4. Bake 10-12 mins.`
+            },
+            "icecream": {
+                title: "Banana Ice Cream",
+                ingredients: `- 2 frozen bananas<br>- Almond milk<br>- 1 tsp cocoa powder`,
+                procedure: `1. Blend frozen bananas & milk.<br> 2. Add cocoa if desired.<br> 3. Serve immediately.`
+            },
+            "burger": {
+                title: "Portobello Mushroom Burger",
+                ingredients: `- 1 portobello mushroom cap<br>- Olive oil, garlic, herbs<br>- Whole-grain bun<br>- Lettuce, tomato, avocado`,
+                procedure: `1. Marinate the mushroom with olive oil, garlic, and herbs.<br>
+                    2. Grill for 5-7 minutes on each side.<br>
+                    3. Assemble on a whole-grain bun with lettuce, tomato, and avocado.<br>
+                    4. Enjoy a juicy and healthy alternative to a beef burger!`
+            },
+            "frenchfries": {
+                title: "Baked Sweet Potato Fries",
+                ingredients: `- 2 sweet potatoes<br>- 1 tbsp olive oil<br>- Paprika, salt`,
+                procedure: `1. Preheat oven to 400°F.<br> 2. Cut sweet potatoes into thin wedges.<br>
+                    3. Toss with olive oil, paprika, and salt.<br>
+                    4. Bake for 25-30 minutes, flipping halfway for crispy fries!`
+            },
+            "chocolate": {
+                title: "Cacao Smoothie",
+                ingredients: `- 1 cup almond milk<br>- 1 tbsp cacao powder<br>- 1 pitted date<br>- 1/2 frozen banana`,
+                procedure: `1. Blend almond milk, cacao powder, date, and banana until smooth.<br>
+                    2. Serve immediately for a rich and healthy chocolate fix!`
+            }
+        };
+
+        function suggestRecipe() {
+            const cravingInput = document.getElementById('craving').value.trim().toLowerCase();
+            const recipeOutput = document.getElementById('recipe');
+            const recipeContainer = document.getElementById('recipeContainer');
+
+            if (cravingInput in recipes) {
+                const { title, image, ingredients, procedure } = recipes[cravingInput];
+                recipeOutput.innerHTML = `<h2>${title}</h2>
+                                          <h3>Ingredients:</h3><p>${ingredients}</p>
+                                          <h3>Procedure:</h3><p>${procedure}</p>`;
+                recipeContainer.style.display = 'block';
+            } else {
+                recipeOutput.innerHTML = "<p>Sorry, we don't have a suggestion for that. Try a wholesome snack!</p>";
+                recipeContainer.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>
+```

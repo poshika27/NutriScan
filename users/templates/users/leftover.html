@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Nutriscan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            background-color: #D3E8D5;
+        }
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            display: block;
+            margin: 10px 0;
+        }
+        .recipe-page {
+            display: none; 
+            padding: 20px;
+            background: white;
+        }
+    </style>
+    <script>
+        function toggleSelection(event) {
+            const target = event.target;
+            target.classList.toggle('bg-[#07754B]');
+            target.classList.toggle('text-white');
+        }
+
+        function showRecipes() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('recipe-page').style.display = 'block';
+        }
+
+        function goBack() {
+            document.getElementById('recipe-page').style.display = 'none';
+            document.getElementById('main-page').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div id="main-page" class="flex items-center justify-center min-h-screen">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <div class="flex items-center mb-4">
+                <h1 class="text-5xl font-semibold" style="color: rgb(7, 117, 75);">Nutriscan</h1>
+            </div>
+            <div class="flex mb-4">
+                <input class="border border-gray-300 rounded-l-lg p-2 flex-grow" placeholder="Enter Ingredients" type="text"/>
+                <button class="bg-[#28a745] text-white p-2 rounded-r-lg">Search</button>
+            </div>
+            <div class="mb-4">
+                <h2 class="text-lg font-semibold">Basic Ingredients</h2>
+                <div class="grid grid-cols-2 gap-2" id="ingredients-list">
+                    <span class="border border-gray-300 rounded-lg p-2 text-center cursor-pointer" onclick="toggleSelection(event)">butter</span>
+                    <span class="border border-gray-300 rounded-lg p-2 text-center cursor-pointer" onclick="toggleSelection(event)">egg</span>
+                    <span class="border border-gray-300 rounded-lg p-2 text-center cursor-pointer" onclick="toggleSelection(event)">milk</span>
+                    <span class="border border-gray-300 rounded-lg p-2 text-center cursor-pointer" onclick="toggleSelection(event)"> onion</span>
+                    <span class="border border-gray-300 rounded-lg p ```html
+-2 text-center cursor-pointer" onclick="toggleSelection(event)">Mushroom</span>
+                    <span class="border border-gray-300 rounded-lg p-2 text-center cursor-pointer" onclick="toggleSelection(event)">ketchup</span>
+                    <span class="border border-gray-300 rounded-lg p-2 text-center cursor-pointer" onclick="toggleSelection(event)">White Rice</span>
+                </div>
+            </div>
+            <button class="button" onclick="window.location.href='{% url 'recipe' %}'">See Recipes</button>
+        </div>
+    </div>
+
+    <div id="recipe-page" class="recipe-page">
+        <h2>Recipes</h2>
+        <p>Here, you can display your recipes based on the ingredients selected.</p>
+        <button class="button" onclick="goBack()">Back to Main</button>
+    </div>
+</body>
+</html>
