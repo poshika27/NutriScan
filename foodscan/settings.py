@@ -133,5 +133,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 import os
 
-GEMINI_API_KEY = "AIzaSyDEQgDtKPA_C45Z2tM-1_D5aKmGcqUKGdo"
+GEMINI_API_KEY = "YOUR_API_KEY"
 
